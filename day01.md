@@ -13,5 +13,18 @@ var  a,b,i,s1,s2 = true,false,3,"hello","world"
 a,b,i,s1,s2 := true,false,3,"hello","world"
 注意：只能在函数内使用
 
+# 内建变量类型
+
+## 布尔 字符串
+bool，string
+
+## 整形（有符号、u无符号）
+(u)int,(u)int8,(u)int16,(u)int32,(u)int64,uintptr
+
+## 字符
+byte,rune(类似char，长度32位)
+
+## 浮点数、复数
+float32，float64，complex64,complex128
 
 
