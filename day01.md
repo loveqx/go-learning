@@ -318,13 +318,14 @@ fmt.Printf("swap2 after，a and b is %d,%d",a,b)
 ## 八、数组
 
 #### 1、定义数组
-var array1 [5]int  // 5个整数的数组
-array2 := [3]int{1,2,4}   // 3个整数的数组
-array3 := [...]int{1,2,3,4,5,6,7,8}  // 不定个数的数组
-var array4 [4][[5]int  // 二维数组
+- var array1 [5]int  // 5个整数的数组
+- array2 := [3]int{1,2,4}   // 3个整数的数组
+- array3 := [...]int{1,2,3,4,5,6,7,8}  // 不定个数的数组
+- var array4 [4][[5]int  // 二维数组
 
 
 #### 2、数组遍历
+```
 for i :=0;i<len(array1);i++{
      fmt.Println(array1[i])
 }
@@ -343,17 +344,19 @@ for i,v := range array1{
 for _,v := range array1{
     fmt.Pirntln(v)
 }
+```
 
-//数组是值类型，拷贝
-
+- 数组是值类型，拷贝
+```
 func printArray(arr [5]int){
 	arr[0] = 1000
 	for i,v := range arr{
 		fmt.Println(i,v)
 	}
 }
+```
 
-// 修改数组第一个元素后，不会改变原始数组
+- 修改数组第一个元素后，不会改变原始数组
 
 
 
@@ -398,26 +401,29 @@ fmt.Println(s)
 
 
 ##### copy元素
+```
 s4 := make([]int,10,16)
 s3 := s2[3:5]
 copy(s4,s3)  // dst src 结果[6 7 8 0 0 0 0 0 0 0]
-
+```
 
 
 ##### 增加元素
 
-s4 := append(s3,10)  //[6,7,10]
+```s4 := append(s3,10)  //[6,7,10]```
 
 ##### 删除元素
+```
 s11 := [2,4,6,8,0,0,0,0,0,0,0]  //要删掉8
 
 s11 = append(s11[:3],s11[4:]...) // 通过切片拼接
-
+```
 ##### 删除头部或尾部元素
+```
 stop = s12[1:]
 stail = stail[len(stail]-1
 
-
+```
 
 
 
