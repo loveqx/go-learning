@@ -1,4 +1,6 @@
-## 变量定义
+#基础语法day01
+
+## 一、变量定义
 
 ### 1、使用var关键字
 ```
@@ -19,7 +21,7 @@ a,b,i,s1,s2 := true,false,3,"hello","world"
 ```
 注意：只能在函数内使用
 
-## 内建变量类型
+## 二、内建变量类型
 
 ### 1、布尔 字符串
 bool，string
@@ -33,7 +35,7 @@ byte,rune(类似char，长度32位)
 ### 4、浮点数、复数
 float32，float64，complex64,complex128
 
-## 常量定义
+## 三、常量定义
 
 const finename = "abc.txt"
 常量可以定义在函数内，也可以定义在包内
@@ -92,10 +94,10 @@ const (
 
 
 
-##  条件语句
+##  四、条件语句
 
 
-#### if
+### if
 ```
 func bounded(v int) int{
    if v > 100 {
@@ -124,7 +126,7 @@ if contents,err := ioutil.ReadFile(filename); err == nil {
 ```
 
 
-#### switch
+### switch
 ```
 func grade(score int) string{
     switch {
@@ -144,7 +146,7 @@ func grade(score int) string{
 ```
 
 
-#### for 
+## 五、循环for 
 ```
 //正常循环
 sum := 0
@@ -194,6 +196,157 @@ func forever(){
 #### 2、if 条件里可以定义变量
 #### 3、 没有while
 #### 4、 swittch 不需要break，也可以直接switch多个条件
+
+
+## 六、函数
+
+### 普通函数
+```
+func eval(a,b int ,op string) (int ,error){
+
+    switch op{
+
+       case "+":
+           return a + b,nil
+       case "-":
+           return a - b,nil
+       case "*":
+           return a * b,nil
+       case "/":
+           q,_ := div(a,b)
+           return q,nil
+       default:
+           return 0,fmt.Errorf("unsupported operation: #{op}")
+
+   }
+
+
+}
+
+func div(a, b int) (q, r int){
+
+    return a / b, a % b
+} 
+
+```
+
+
+### 函数为参数
+
+```
+func apply(op func(int ,int) int, a, b int) int{
+       p := reflect.ValueOf(op).Pointer()
+       opName := runtime.FuncForPC(p).Name()
+       fmt.Printf("calling function %s with args" + "(%d, %d)\n",opName, a, b)
+       return op(a, b)
+
+}
+
+// 调用
+rt = apply(func(a , b int) int{
+    retun int(math.Pow(float64(a), float64(b)))
+    },3, 4)
+
+}
+```
+
+### 可变参数的函数
+```
+func sum(numbers ...int) int{
+    s := 0
+    for i := range numbers {
+
+      s += number[i]
+    }
+    return s
+
+}
+
+// 调用
+
+fmt.Println(sum(1,2,3,4,5))
+```
+
+## 七、指针
+
+Go语言使用值传递？引用传递？Go语言只有值传递一种。
+// 指针初体验
+
+```
+
+func pointTest(){
+    var a int = 2
+    var pa *int = &a
+    *pa = 40
+    fmt.Println(a)    
+
+}
+
+
+// 2个数交换
+func swap(a, b int) (int, int ){
+	a, b = b, a
+	return a,b
+
+}
+// 调用
+a, b := 3,4
+a, b = swap(a,b)
+
+// 2个数交换
+func swap1(a, b int) (int, int ){
+	return b,a
+
+}
+// 调用
+a, b := 3,4
+a, b = swap(a,b)
+
+// 2个数交换
+func swap2(a, b *int){
+	*b,*a = *a, *b
+}
+// 调用
+a, b := 3,4
+swap2(&a,&b)
+fmt.Printf("swap2 after，a and b is %d,%d",a,b)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
