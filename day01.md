@@ -1,6 +1,6 @@
 #基础语法day01
 
-## 一、变量定义
+@[toc] 一、变量定义
 
 ### 1、使用var关键字
 ```
@@ -21,7 +21,7 @@ a,b,i,s1,s2 := true,false,3,"hello","world"
 ```
 注意：只能在函数内使用
 
-## 二、内建变量类型
+@[toc] 二、内建变量类型
 
 ### 1、布尔 字符串
 bool，string
@@ -370,6 +370,8 @@ s2 := arr1[2:6]
 s3 := s2[3:5]
 fmt.Println(s2) // [3,4,5,6]
 fmt.Println(s3) // [6,7],注意，这里有cap
+fmt.Printf("s2=%v,len(s2)=%d,cap(s2)=%d\n",s2, len(s2),cap(s2)) //注意：len=4，cap=6
+
 ```
 
 - slice可以向后扩展，不可以向前扩展
@@ -402,9 +404,9 @@ fmt.Println(s)
 
 ##### copy元素
 ```
-s4 := make([]int,10,16)
-s3 := s2[3:5]
-copy(s4,s3)  // dst src 结果[6 7 8 0 0 0 0 0 0 0]
+s4 := make([]int,10,16)  // [0,0,0,0,0,0,0,0,0,0]
+s3 := s2[3:5]   //[6,7]
+copy(s4,s3)  // dst src 结果[6 7 0 0 0 0 0 0 0 0]
 ```
 
 
@@ -420,13 +422,66 @@ s11 = append(s11[:3],s11[4:]...) // 通过切片拼接
 ```
 ##### 删除头部或尾部元素
 ```
-stop = s12[1:]
+spop = s12[1:]
 stail = stail[len(stail]-1
 
 ```
 
 
+## 十、Map
 
+map是无序键值对
+
+- 1、定义
+```
+var mapname map[keytype] valuetype
+mapname map名称
+keytype 键类型
+valuetype 值类型
+```
+- 2、常规创建
+```
+var myMap[string] int {
+ 
+    "java":1,
+    "python": 2,
+    "go":3,
+
+}
+```
+- 3、make方式创建
+myMap := make(map[string] int 16)
+注意：不能使用new方式构造map
+mapCreated := new(map[string] float64)
+mapCreated["name"] = 1.2 //会报错 invalid operation: mapCreated["name"] (type *map[string]float64 does not support indexing)
+fmt.Println(reflect.TypeOf(mapCreated))
+
+- 4、获取元素
+```
+for k,v := range myMap{
+    fmt.Println(k,v)
+}
+
+myMap["java"]
+```
+注意：key不存在时，会获取value类型的初始值，比如value类型是int，则会获取初始值为0
+
+- 5、判断key是否存在
+```
+if value, ok = myMap[key];ok{
+    fmt.Println(value)
+}else {
+    fmt.Println("key is not exists")
+
+}
+```
+- 6、删除key
+delete(map,key)
+
+- 7、map的key
+1.map使用哈希表，必须可以比较相等
+2.出了slice，map，function的内建类型都可以作为key
+3.Struct类型不包含上述字段，也可以作为key
 
 
 
