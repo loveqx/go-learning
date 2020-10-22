@@ -486,6 +486,37 @@ delete(map,key)
 
 
 
+## 十一、rune
+rune是用来区分字符值和整数值的
+
+- byte 等同于int8，即一个字节长度，常用来处理ascii字符
+- rune 等同于int32，即4个字节长度,常用来处理unicode或utf-8字符
+
+```
+str := "你好 world"
+    fmt.Println(utf8.RuneCountInString(str))//utf8获取字符串长度
+    fmt.Printf("len(str):%d\n", len(str)) //返回len(str):12
+    fmt.Printf("len(rune(str)):%d\n", len([]rune(str))) //len(rune(str)):8
+```
+
+
+```
+package main
+import (
+    "fmt"
+)
+func main() {
+    str := "hello 世界"
+    str2 := []rune(str)
+    t := str2
+    t[0] = 'w'
+    fmt.Println(string(str2)) //“wello 世界”
+    fmt.Println(string(str))  //“hello 世界”
+}
+
+```
+#### 说明
+- str2是str的一个rune类型的切片的引用
 
 
 
